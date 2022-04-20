@@ -45,6 +45,7 @@ for (let [input, output] of myArr){
         numErrors++;
     }
     trace = trace.concat('\n', txt)
+    counter++;
 }
 if (numErrors != 0) {
     console.log(trace);
