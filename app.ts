@@ -52,5 +52,3 @@ if (numErrors != 0) {
 } else {
     console.log('ADD CHECKER PASSED CLEAN!')
 }
-
-//addChecker()
