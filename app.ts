@@ -2,7 +2,7 @@ class StringCalculator {
     Add(nums: string): number{
         let arr = nums.split(',');
         //check that we got two numbers, and that both of those numbers are smaller than 15 characters long (number is max 16 digits)
-        if (arr.length == 2 && arr[0].length < 15 && arr[0].length < 15){
+        if (arr.length == 2 && arr[0].length < 15 && arr[1].length < 15){
             let numAr = [parseFloat(arr[0]), parseFloat(arr[1])]
             //check that they are both numbers
             if (!isNaN(numAr[0]) && !isNaN(numAr[1])){
