@@ -15,13 +15,12 @@ class StringCalculator {
 }
 
 //TEST PREPARATION
-type AddCheckerFunc = (input: string, expectedOutput: number, index: number) => void;
+type AddCheckerFunc = (input: string, expectedOutput: number, index: number) => [string, boolean];
 
 const sc: StringCalculator = new StringCalculator()
 
-let trace: string = "ADD CHECKER TRACE\n\n";
-let numErrors: number = 0;
 const addChecker: AddCheckerFunc = (input, expectedOutput, index) => {
+    let success = true;
     let realOutput = sc.Add(input);
     let txt: string;
     if (realOutput === expectedOutput){
@@ -29,23 +28,29 @@ const addChecker: AddCheckerFunc = (input, expectedOutput, index) => {
     } else {
         txt = '\nTest n-' + index + ' ERROR';
         numErrors++;
+        success = false;
     }
     txt += 'For input: ' + input + '\nExpected output: ' + expectedOutput + '\nCurrent output: ' + realOutput + '\n';
-    trace.concat('\n', txt)
+    return [txt, success];
+}
+
+//TEST GENERATION
+const myArr: [string, number][] = [['', 0], ['1,2', 3], ['13475,0', 13475], ['0,13475', 13475], ['-13475, 3', -13472], ['9007199254740992,0', 0], ['4, 9007199254740990', 0], ['-9007199254740991, - 4', 0], ['-3, -5', -8], ['true', 0]]
+let counter: number = 0;
+let numErrors: number = 0;
+let trace: string = "ADD CHECKER TRACE\n\n";
+for (let [input, output] of myArr){
+    let [txt, success] = addChecker(input, output, counter)
+    if (!success){
+        numErrors++;
+    }
+    trace = trace.concat('\n', txt)
 }
 if (numErrors != 0) {
     console.log(trace);
     console.log('NUM. ERRORS - ' + numErrors);
 } else {
     console.log('ADD CHECKER PASSED CLEAN!')
-}
-
-//TEST GENERATION
-const myArr: [string, number][] = [['', 0], ['1,2', 3], ['13475,0', 13475], ['0,13475', 13475], ['-13475, 3', -13472], ['9007199254740992,0', 0], ['4, 9007199254740990', 0], ['-9007199254740991, - 4', 0], ['-3, -5', -8], ['true', 0]]
-let counter: number = 0;
-for (let [input, output] of myArr){
-    let x = addChecker(input, output, counter);
-    counter++;
 }
 
 //addChecker()
