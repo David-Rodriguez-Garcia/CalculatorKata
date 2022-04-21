@@ -25,8 +25,14 @@ var myArr = [['123,  351', 474], ['123,  ', 0], ['123,  &', 0]];
 var generateInput = function () {
     for (var i = 0; i < 100; i++) {
         var fnum = getRandomNumber(-90000000000, 90000000000);
-        var snum = getRandomNumber(-90000000000, 90000000000);
-        myArr.push([fnum + ',' + snum, fnum + snum]);
+        var input = "".concat(fnum);
+        var expectedOutput = fnum;
+        for (var c = 0; c < getRandomNumber(1, 100); c++) {
+            var newNum = getRandomNumber(-90000000000, 90000000000);
+            input += ',' + newNum;
+            expectedOutput += newNum;
+        }
+        myArr.push([input, expectedOutput]);
     }
 };
 generateInput();
@@ -50,5 +56,6 @@ if (numErrors != 0) {
     console.log('NUM. ERRORS - ' + numErrors);
 }
 else {
+    console.log(trace);
     console.log('ADD CHECKER PASSED CLEAN!');
 }

@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.StringCalculator = void 0;
-/*TODO - The input seems to be too large for us to handle it. We must check the values we are passing or the conditionals */
 var StringCalculator = /** @class */ (function () {
     function StringCalculator() {
     }

@@ -30,9 +30,14 @@ let myArr: [string, number][] = [['123,  351', 474], ['123,  ', 0], ['123,  &', 
 const generateInput = () => {
     for (let i: number = 0; i < 100; i++) {
         let fnum = getRandomNumber(-90000000000, 90000000000);
-        let snum = getRandomNumber(-90000000000, 90000000000);
-
-        myArr.push([fnum + ',' + snum, fnum + snum])
+        let input = `${fnum}`;
+        let expectedOutput = fnum;
+        for (let c: number = 0; c < getRandomNumber(1, 100); c++){
+            let newNum = getRandomNumber(-90000000000, 90000000000);
+            input += ',' + newNum;
+            expectedOutput += newNum;
+        }
+        myArr.push([input, expectedOutput])
     }
 }
 
@@ -57,5 +62,6 @@ if (numErrors != 0) {
     console.log(txtError);
     console.log('NUM. ERRORS - ' + numErrors);
 } else {
+    console.log(trace);
     console.log('ADD CHECKER PASSED CLEAN!')
 }
