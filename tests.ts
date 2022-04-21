@@ -33,7 +33,11 @@ const generateInput = () => {
         let expectedOutput = fnum;
         for (let c: number = 0; c < getRandomNumber(1, 100); c++){
             let newNum = getRandomNumber(-90000000000, 90000000000);
-            input += ',' + newNum;
+            if (c % 2 == 0){
+                input += ',' + newNum;
+            } else {
+                input += '\n' + newNum;
+            }
             expectedOutput += newNum;
         }
         myArr.push([input, expectedOutput])

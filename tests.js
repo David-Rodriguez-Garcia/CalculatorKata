@@ -2,7 +2,6 @@
 exports.__esModule = true;
 var app_js_1 = require("./app.js");
 var sc = new app_js_1.StringCalculator();
-//returns true if no errors, false if errors
 var addChecker = function (input, expectedOutput, index) {
     var txt;
     var success = true;
@@ -29,14 +28,18 @@ var generateInput = function () {
         var expectedOutput = fnum;
         for (var c = 0; c < getRandomNumber(1, 100); c++) {
             var newNum = getRandomNumber(-90000000000, 90000000000);
-            input += ',' + newNum;
+            if (c % 2 == 0) {
+                input += ',' + newNum;
+            }
+            else {
+                input += '\n' + newNum;
+            }
             expectedOutput += newNum;
         }
         myArr.push([input, expectedOutput]);
     }
 };
 generateInput();
-//const myArr: [string, number][] = [['', 0], ['1,2', 3], ['13475,0', 13475], ['0,13475', 13475], ['-13475, 3', -13472], ['9007199254740992,0', 0], ['4, 9007199254740990', 0], ['-9007199254740991, - 4', 0], ['-3, -5', -8], ['true', 0]]
 var numErrors = 0;
 var counter = 0;
 var trace = "ADD CHECKER TRACE\n\n";
