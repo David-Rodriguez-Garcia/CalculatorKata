@@ -4,7 +4,6 @@ type AddCheckerFunc = (input: string, expectedOutput: number, index: number) => 
 
 const sc: StringCalculator = new StringCalculator()
 
-//returns true if no errors, false if errors
 const addChecker: AddCheckerFunc = (input, expectedOutput, index) => {
     let txt: string;
     let success = true;
@@ -43,7 +42,6 @@ const generateInput = () => {
 
 generateInput();
 
-//const myArr: [string, number][] = [['', 0], ['1,2', 3], ['13475,0', 13475], ['0,13475', 13475], ['-13475, 3', -13472], ['9007199254740992,0', 0], ['4, 9007199254740990', 0], ['-9007199254740991, - 4', 0], ['-3, -5', -8], ['true', 0]]
 let numErrors: number = 0;
 let counter: number = 0;
 let trace: string = "ADD CHECKER TRACE\n\n";
