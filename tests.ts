@@ -40,7 +40,7 @@ function generateSeparators(): string {
     return separators;
 }
 
-const generateInput = () => {
+const generateInput = ():[string, number][] => {
     let myArr: [string, number][] = [['123,  351', 474], ['123,  ', 0], ['123,  &', 0]];
     for (let i: number = 0; i < 100; i++) {
         let separatorsTxt = '//' + generateSeparators() + '\n'
@@ -60,10 +60,10 @@ const generateInput = () => {
 
 let myArr = generateInput();
 
-let numErrors: number = 0;
-let counter: number = 0;
-let trace: string = "ADD CHECKER TRACE\n\n";
-let txtError: string = "ADD CHECKER TRACE\n\n";
+let numErrors = 0;
+let counter = 0;
+let trace = "ADD CHECKER TRACE\n\n";
+let txtError = "ADD CHECKER TRACE\n\n";
 for (let [input, output] of myArr){
     let [txt, success] = addChecker(input, output, counter)
     if (!success){

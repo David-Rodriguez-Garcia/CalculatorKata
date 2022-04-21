@@ -17,7 +17,7 @@ export class StringCalculator {
         let arr: string[];
         if (nums[0] == '/' && nums[1] == '/'){
             //number string without the initial separators
-            let numArr: string | string[] = nums.split('\n');
+            let numArr: string[] = nums.split('\n');
             numArr.shift();//delete the first element
             let numString = numArr.join(',');//join the array to create a string
             for (let separator of separators) {
