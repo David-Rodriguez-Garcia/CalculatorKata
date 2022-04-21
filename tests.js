@@ -12,17 +12,16 @@ var addChecker = function (input, expectedOutput, index) {
     }
     else {
         txt = '\nTest n-' + index + ' ERROR';
-        numErrors++;
         success = false;
     }
-    txt += 'For input: ' + input + '\nExpected output: ' + expectedOutput + '\nCurrent output: ' + realOutput + '\n';
+    txt += '  -- For input: ' + input + ' -- Expected output: ' + expectedOutput + ' -- Current output: ' + realOutput + '\n';
     return [txt, success];
 };
 //GENERATE INPUT LOGIC & IMPLEMENTATION
 function getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
-var myArr = [['123,  351', 474], ['123,  ', 474], ['123,  &', 0]];
+var myArr = [['123,  351', 474], ['123,  ', 0], ['123,  &', 0]];
 var generateInput = function () {
     for (var i = 0; i < 100; i++) {
         var fnum = getRandomNumber(-90000000000, 90000000000);
@@ -41,13 +40,13 @@ for (var _i = 0, myArr_1 = myArr; _i < myArr_1.length; _i++) {
     var _b = addChecker(input, output, counter), txt = _b[0], success = _b[1];
     if (!success) {
         numErrors++;
-        txtError.concat('\n', txt);
+        txtError += '\n' + txt;
     }
     trace = trace.concat('\n', txt);
     counter++;
 }
 if (numErrors != 0) {
-    console.log(trace);
+    console.log(txtError);
     console.log('NUM. ERRORS - ' + numErrors);
 }
 else {

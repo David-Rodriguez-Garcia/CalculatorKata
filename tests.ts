@@ -13,10 +13,9 @@ const addChecker: AddCheckerFunc = (input, expectedOutput, index) => {
         txt = '\nTest n-' + index + ' CORRECT';
     } else {
         txt = '\nTest n-' + index + ' ERROR';
-        numErrors++;
         success = false;
     }
-    txt += 'For input: ' + input + '\nExpected output: ' + expectedOutput + '\nCurrent output: ' + realOutput + '\n';
+    txt += '  -- For input: ' + input + ' -- Expected output: ' + expectedOutput + ' -- Current output: ' + realOutput + '\n';
     return [txt, success];
 }
 
@@ -27,7 +26,7 @@ function getRandomNumber(min: number, max: number): number {
     return Math.random() * (max-min) + min;
 }
 
-let myArr: [string, number][] = [['123,  351', 474], ['123,  ', 474], ['123,  &', 0]];
+let myArr: [string, number][] = [['123,  351', 474], ['123,  ', 0], ['123,  &', 0]];
 const generateInput = () => {
     for (let i: number = 0; i < 100; i++) {
         let fnum = getRandomNumber(-90000000000, 90000000000);
@@ -48,14 +47,14 @@ for (let [input, output] of myArr){
     let [txt, success] = addChecker(input, output, counter)
     if (!success){
         numErrors++;
-        txtError.concat('\n', txt);
+        txtError += '\n' + txt;
     }
     trace = trace.concat('\n', txt)
     counter++;
 }
 
 if (numErrors != 0) {
-    console.log(trace);
+    console.log(txtError);
     console.log('NUM. ERRORS - ' + numErrors);
 } else {
     console.log('ADD CHECKER PASSED CLEAN!')
