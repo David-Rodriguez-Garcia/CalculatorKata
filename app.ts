@@ -41,7 +41,7 @@ export class StringCalculator {
                 return val;
             });
             if (negativeArray.length > 0){
-                throw new RangeError(`${negativeArray}`);
+                throw new RangeError(`negatives not allowed: ${negativeArray}`);
             }
             if (allNumbers) {
                 let result = numAr.reduce((acumulator, elem) => acumulator + elem, 0);
