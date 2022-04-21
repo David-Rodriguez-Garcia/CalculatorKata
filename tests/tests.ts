@@ -17,8 +17,13 @@ FOR THE 8th STEP, CAN TEST THE FOLLOWING:
 myArr.push(["//,)v,! [!][#]+\n\
 813.5148379752474\n\
 343.10691152122877#136.84586190858812 453.02565679174324", 1746.4932681968075]);
-
 myArr.push(["//[*][%]\n1*2%3", 6]);
+
+/*
+    FOR THE 9th STEP, TEST THE FOLLOWING:
+*/
+myArr.push(["//[foo][bar]\n1foo2bar3", 6]);
+myArr.push(["//[foo][bar]\n1foo2barfoobarbar3", 6]);
 
 let numErrors = 0;// error counter
 let counter = 0;// to use as Index

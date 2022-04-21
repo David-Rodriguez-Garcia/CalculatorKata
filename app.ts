@@ -48,6 +48,10 @@ export class StringCalculator {
             let allNumbers = true;
             let negativeArray: number [] = [];
             let numAr: number[] = arr.map(elem => {
+                //this solves (at least temporarily) the problem of empty strings. Empty strings may appear when having two separators together
+                if (elem === ''){
+                    elem = '0'
+                }
                 let val = parseFloat(elem);
                 if (isNaN(val)) {
                     allNumbers = false;
