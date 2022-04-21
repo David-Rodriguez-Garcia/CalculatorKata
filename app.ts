@@ -1,11 +1,28 @@
 export function getSeparators(txt: string): string[] {
     let ar = [',', '\n'];//initial separators
     if (txt[0] == '/' && txt[1] === '/'){
-        let newSep = Array.from(txt.split('\n', 2)[0]);//the new separators array
+        let fullStrSep = txt.split('\n', 2)[0];//string with all the separators
+        //extract all the [] multiple separators and add them to the array
+        fullStrSep = fullStrSep.slice(2);// without the initial '//'
+        while (fullStrSep.indexOf('[') != -1 && fullStrSep.indexOf(']') != -1) {
+            let fIndex = fullStrSep.indexOf('[');
+            let sIndex = fullStrSep.indexOf(']');
+
+            //we are setting it to fIndex +1 && sIndex so that it doesn't take the '[' ']' characters
+            let compoundedSeparator = fullStrSep.substring(fIndex + 1, sIndex);
+
+            //add it to the list of separators if not empty string -> case: []
+            if (compoundedSeparator != '') ar.push(compoundedSeparator);
+
+            //delete from the string
+            fullStrSep = fullStrSep.substring(0, fIndex) + fullStrSep.substring(sIndex + 1);
+        }
+
+        let newSep = Array.from(fullStrSep);//the new separators array
         newSep.splice(0,2);//take out the initial //
         ar = ar.concat(newSep);
-        //now ar is clean with only the separators as an array list
-        //console.log('SEPARATORS ' + ar[0]);
+        //we sort the elements for the error we described in the notes
+        ar = ar.sort((a, b) => b.length - a.length);
     }
     return ar;
 }
@@ -20,7 +37,7 @@ export class StringCalculator {
             numArr.shift();//delete the first element
             let numString = numArr.join(',');//join the array to create a string
             for (let separator of separators) {
-                let temNumArr = numString.split(separator);//temporary numeric array
+                let temNumArr = numString.split(separator);//temporary numeric array (numbers are as strings here)
                 numString = temNumArr.join(',');
             }
             arr = numString.split(',');
