@@ -4,7 +4,7 @@ import { addChecker } from './addChecker'
 //Generate input
 let myArr = generateInput();
 
-//TO TEST THE EXCEPTIONAL CASE DESCRIBED IN THE 'notas.txt' FILE
+//TO TEST THE EXCEPTIONAL CASE DESCRIBED IN THE 'readme.txt' FILE
 myArr.push(["\/\/+_'H)c[\/\/][\/\/\/]\n\
 737.9968971872946\/\/\/1023.7948207721224,802.7481724259906H435.9245044605324\n\
 713.2142280760398\n\
