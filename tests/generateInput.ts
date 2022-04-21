@@ -18,7 +18,7 @@ export const generateInput = ():[string, number][] => {
             input += separators[Math.floor(getRandomNumber(0, separators.length))] + newNum;
             expectedOutput += newNum;
         }
-        if (hasNegative) expectedOutput = 0;
+        if (hasNegative) expectedOutput = -1;
         myArr.push([input, expectedOutput])
     }
     return myArr;

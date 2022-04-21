@@ -10,7 +10,6 @@ export function getSeparators(txt: string): string[] {
     return ar;
 }
 
-// ERROR -  IN THE SPLIT(separator, 2) IT ONLY GIVES THE FIRST TWO ELEMENTS, BUT THE REST ARE EXCLUDED
 export class StringCalculator {
     Add(nums: string): number{
         let separators = getSeparators(nums);
@@ -26,12 +25,25 @@ export class StringCalculator {
             }
             arr = numString.split(',');
         } else {
-            //arr now numString
             arr = nums.split(/[\n,]/);
         }
         if (arr.length > 1 && arr.length <= 80){
-            if (arr.every((elem) => !isNaN(parseFloat(elem)))){                
-                let numAr: number[] = arr.map(elem => parseFloat(elem));
+            let allNumbers = true;
+            let negativeArray: number [] = [];
+            let numAr: number[] = arr.map(elem => {
+                let val = parseFloat(elem);
+                if (isNaN(val)) {
+                    allNumbers = false;
+                }
+                else if (val < 0) {
+                    negativeArray.push(val);
+                }
+                return val;
+            });
+            if (negativeArray.length > 0){
+                throw new RangeError(`${negativeArray}`);
+            }
+            if (allNumbers) {
                 let result = numAr.reduce((acumulator, elem) => acumulator + elem, 0);
                 return (result);
             }
