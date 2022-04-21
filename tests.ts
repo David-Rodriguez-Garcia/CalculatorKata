@@ -1,4 +1,4 @@
-import {StringCalculator} from "./app.js"
+import { StringCalculator, getSeparators } from "./app.js"
 //TEST CHECKER
 type AddCheckerFunc = (input: string, expectedOutput: number, index: number) => [string, boolean];
 
@@ -25,26 +25,40 @@ function getRandomNumber(min: number, max: number): number {
     return Math.random() * (max-min) + min;
 }
 
-let myArr: [string, number][] = [['123,  351', 474], ['123,  ', 0], ['123,  &', 0]];
+//should we accept other ascii characters? - should we pass numbers? - We are assuming that only the characters between 32 - 47 && 58 - 126 will be passed
+function generateSeparators(): string {
+    let separators = '';
+    for (let c = 0; c < getRandomNumber(1,10); c++){
+        if (c % 2 === 0){
+            let num = Math.floor(getRandomNumber(32, 47));
+            if (num === 45 || num == 46) num = 47; //not containing periods nor '-'
+            separators += String.fromCharCode(num);
+        } else {
+            separators += String.fromCharCode(Math.floor(getRandomNumber(58, 126)));
+        }
+    }
+    return separators;
+}
+
 const generateInput = () => {
+    let myArr: [string, number][] = [['123,  351', 474], ['123,  ', 0], ['123,  &', 0]];
     for (let i: number = 0; i < 100; i++) {
+        let separatorsTxt = '//' + generateSeparators() + '\n'
         let fnum = getRandomNumber(-90000000000, 90000000000);
-        let input = `${fnum}`;
+        let input = separatorsTxt + fnum;
         let expectedOutput = fnum;
+        let separators = getSeparators(input);//to make sure it works we pass also the content
         for (let c: number = 0; c < getRandomNumber(1, 100); c++){
             let newNum = getRandomNumber(-90000000000, 90000000000);
-            if (c % 2 == 0){
-                input += ',' + newNum;
-            } else {
-                input += '\n' + newNum;
-            }
+            input += separators[Math.floor(getRandomNumber(0, separators.length))] + newNum;
             expectedOutput += newNum;
         }
         myArr.push([input, expectedOutput])
     }
+    return myArr;
 }
 
-generateInput();
+let myArr = generateInput();
 
 let numErrors: number = 0;
 let counter: number = 0;
@@ -64,6 +78,6 @@ if (numErrors != 0) {
     console.log(txtError);
     console.log('NUM. ERRORS - ' + numErrors);
 } else {
-    console.log(trace);
+    //console.log(trace);
     console.log('ADD CHECKER PASSED CLEAN!')
 }
