@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "lib": ["DOM", "ES2016"]
+        "lib": ["DOM", "ES2016"],
     },
     "include": ["./**/*.ts", "./*.ts"]
 }

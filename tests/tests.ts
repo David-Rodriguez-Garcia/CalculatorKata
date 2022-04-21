@@ -31,6 +31,6 @@ if (numErrors != 0) {
     console.log(txtError);
     console.log('NUM. ERRORS - ' + numErrors);
 } else {
-    //console.log(trace);
+    if (process.argv[2] == '-trace' || process.argv[2] == '--trace') console.log(trace);
     console.log('ADD CHECKER PASSED CLEAN!')
 }
